@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import proj.financeiro.api.dto.DadosLancamento;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Table(name="lancamentos")
@@ -13,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of="codigo")
 public class Lancamento {
 
     @Id
@@ -27,7 +29,7 @@ public class Lancamento {
     @Column(name = "data_pagamento")
     private LocalDate dataPagamento;
 
-    private String valor;
+    private BigDecimal valor;
 
     private String observacao;
 
@@ -42,11 +44,14 @@ public class Lancamento {
     @JoinColumn(name = "codigo_pessoa")
     private Pessoa pessoa;
 
-    public Lancamento(proj.financeiro.api.dto.DadosLancamento dadosLancamento){
+    public Lancamento(DadosLancamento dadosLancamento){
         this.descricao = dadosLancamento.descricao();
-        this.dataPagamento = LocalDate.parse(dadosLancamento.dataPagamento());
-        this.dataVencimento = LocalDate.parse(dadosLancamento.dataVencimento());
+        this.dataPagamento = dadosLancamento.dataPagamento();
+        this.dataVencimento = dadosLancamento.dataVencimento();
         this.valor = dadosLancamento.valor();
         this.observacao = dadosLancamento.observacao();
+        this.tipo = dadosLancamento.tipo();
+        this.categoria = dadosLancamento.categoria();
+        this.pessoa = dadosLancamento.pessoa();
     }
 }

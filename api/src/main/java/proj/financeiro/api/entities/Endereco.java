@@ -17,6 +17,7 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String cep;
+    private String numero;
 
     public Endereco(proj.financeiro.api.dto.Endereco endereco) {
         this.logradouro = endereco.logradouro();
@@ -25,5 +26,6 @@ public class Endereco {
         this.cidade = endereco.cidade();
         this.estado = endereco.estado();
         this.cep = endereco.cep();
+        this.numero = endereco.numero();
     }
 }
